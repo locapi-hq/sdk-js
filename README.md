@@ -41,8 +41,8 @@ import { LocApi } from '@locapi/sdk';
 
 const locapi = new LocApi({
   apiKey: 'your_api_key_here',
-  // Optional: defaults to https://api.locapi.dev
-  baseUrl: 'https://api.locapi.dev' 
+  // Optional: defaults to https://locapi.dev
+  baseUrl: 'https://locapi.dev' 
 });
 ```
 

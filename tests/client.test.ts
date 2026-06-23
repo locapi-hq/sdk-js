@@ -22,8 +22,8 @@ describe('LocApi Client (JS/TS SDK)', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url, requestInit] = fetchMock.mock.calls[0];
     
-    expect(url).toBe('https://api.locapi.dev/v1/locations?q=Prague');
-    expect(requestInit.headers.get('Authorization')).toBe('Bearer test_token');
+    expect(url).toBe('https://locapi.dev/v1/locations?q=Prague');
+    expect(requestInit.headers.get('Locapi-Api-Key')).toBe('test_token');
     expect(requestInit.headers.get('Accept')).toBe('application/json');
   });
 
@@ -81,7 +81,7 @@ describe('LocApi Client (JS/TS SDK)', () => {
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url, requestInit] = fetchMock.mock.calls[0];
-    expect(url).toBe('https://api.locapi.dev/v1/locations/bulk-lookups');
+    expect(url).toBe('https://locapi.dev/v1/locations/bulk-lookups');
     expect(requestInit.method).toBe('POST');
     expect(requestInit.body).toBe(JSON.stringify({ geonameids: [123, 456] }));
     expect(requestInit.headers.get('Content-Type')).toBe('application/json');

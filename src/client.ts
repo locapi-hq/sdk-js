@@ -39,7 +39,7 @@ export class LocApi {
       throw new Error('LocAPI: API Key is required');
     }
     this.apiKey = options.apiKey;
-    this.baseUrl = (options.baseUrl || 'https://api.locapi.dev').replace(/\/$/, '');
+    this.baseUrl = (options.baseUrl || 'https://locapi.dev').replace(/\/$/, '');
   }
 
   private async request<T>(path: string, options: RequestInit = {}): Promise<T> {
@@ -47,7 +47,7 @@ export class LocApi {
     
     // Inject headers safely
     const headers = new Headers(options.headers);
-    headers.set('Authorization', `Bearer ${this.apiKey}`);
+    headers.set('Locapi-Api-Key', this.apiKey);
     headers.set('Accept', 'application/json');
     if (!headers.has('Content-Type') && options.body) {
       headers.set('Content-Type', 'application/json');
