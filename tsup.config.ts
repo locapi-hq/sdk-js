@@ -10,6 +10,6 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   minify: true,
-  shims: true, // Auto-inject CommonJS polyfills if needed
-  noExternal: ['@locapi/schemas'], // Inline all schemas and types for a self-contained SDK
+  shims: true,
+  noExternal: ['@locapi/schemas'],
 });
