@@ -193,6 +193,19 @@ try {
     console.log(error.issues); // Field-level validation issues if any
   } else {
     console.error('Network or unexpected error:', error);
-  }
 }
 ```
+
+---
+
+## Runnable Examples & Demos
+
+Check out the [examples/](./examples) directory for complete, runnable projects:
+
+- **[01-basic-search](./examples/01-basic-search)**: Basic text search, fetching location by ID, alternative names, and error handling.
+- **[02-geo-and-addresses](./examples/02-geo-and-addresses)**: Geo-radius queries, nearby locations, reverse geocoding, and street-level address autocomplete.
+- **[03-travel-and-ip](./examples/03-travel-and-ip)**: Travel distance matrices, timezone resolution, IP WHOIS/geolocation, and health checks.
+- **[04-browser-autocomplete](./examples/04-browser-autocomplete)**: Interactive browser typeahead search box built with vanilla HTML/TypeScript.
+
+See [examples/README.md](./examples/README.md) for quick-start instructions.
+

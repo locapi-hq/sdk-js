@@ -24,7 +24,10 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "lint": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "example:basic": "node --env-file=examples/.env --experimental-strip-types examples/01-basic-search/index.ts",
+    "example:geo": "node --env-file=examples/.env --experimental-strip-types examples/02-geo-and-addresses/index.ts",
+    "example:travel": "node --env-file=examples/.env --experimental-strip-types examples/03-travel-and-ip/index.ts"
   },
   "devDependencies": {
     "@locapi/schemas": "workspace:*",
