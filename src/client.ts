@@ -108,13 +108,13 @@ export class LocApi {
         delete queryParams.countryCode;
       }
       return this.request<{ success: boolean; data: MeilisearchGeoDocument[]; meta: any }>(
-        `/v1/locations${buildQueryString(queryParams)}`
+        `/api/v1/locations${buildQueryString(queryParams)}`
       );
     },
 
     get: (geonameid: number) => {
       return this.request<{ success: boolean; data: MeilisearchGeoDocument }>(
-        `/v1/locations/${geonameid}`
+        `/api/v1/locations/${geonameid}`
       );
     },
 
@@ -146,7 +146,7 @@ export class LocApi {
         delete queryParams.radiusMeters;
       }
       return this.request<{ success: boolean; data: { results: MeilisearchGeoDocument[] }; meta: any }>(
-        `/v1/locations/geo-search${buildQueryString(queryParams)}`
+        `/api/v1/locations/geo-search${buildQueryString(queryParams)}`
       );
     },
 
@@ -175,7 +175,7 @@ export class LocApi {
         delete queryParams.radiusMeters;
       }
       return this.request<{ success: boolean; data: { results: MeilisearchGeoDocument[] }; meta: any }>(
-        `/v1/locations/nearby${buildQueryString(queryParams)}`
+        `/api/v1/locations/nearby${buildQueryString(queryParams)}`
       );
     },
 
@@ -192,7 +192,7 @@ export class LocApi {
         delete queryParams.radiusMeters;
       }
       return this.request<ReverseGeocodeResponse>(
-        `/v1/locations/reverse-geocode${buildQueryString(queryParams)}`
+        `/api/v1/locations/reverse-geocode${buildQueryString(queryParams)}`
       );
     },
 
@@ -204,12 +204,12 @@ export class LocApi {
       highlight?: boolean;
     }) => {
       return this.request<AutocompleteResponse>(
-        `/v1/locations/autocomplete${buildQueryString(params)}`
+        `/api/v1/locations/autocomplete${buildQueryString(params)}`
       );
     },
 
     bulkLookups: (params: { locations: Coordinate[] }) => {
-      return this.request<BulkLookupResponse>('/v1/locations/bulk-lookups', {
+      return this.request<BulkLookupResponse>('/api/v1/locations/bulk-lookups', {
         method: 'POST',
         body: JSON.stringify(params)
       });
@@ -217,7 +217,7 @@ export class LocApi {
 
     boundaries: (geonameid: number) => {
       return this.request<GeoBoundaryResponse>(
-        `/v1/locations/${geonameid}/boundaries`
+        `/api/v1/locations/${geonameid}/boundaries`
       );
     },
 
@@ -228,7 +228,7 @@ export class LocApi {
       offset?: number;
     }) => {
       return this.request<AlternativeNamesResponse>(
-        `/v1/locations/${geonameid}/alternative-names${buildQueryString(params)}`
+        `/api/v1/locations/${geonameid}/alternative-names${buildQueryString(params)}`
       );
     }
   };
@@ -236,13 +236,13 @@ export class LocApi {
   public readonly countries = {
     getInfo: (params: { countryCode: string }) => {
       return this.request<CountryInfoResponse>(
-        `/v1/countries/info${buildQueryString(params)}`
+        `/api/v1/countries/info${buildQueryString(params)}`
       );
     },
 
     getLocations: (countryCode: string, params?: { q?: string; limit?: number }) => {
       return this.request<{ success: boolean; data: { results: MeilisearchGeoDocument[] }; meta: any }>(
-        `/v1/countries/${countryCode}/locations${buildQueryString(params)}`
+        `/api/v1/countries/${countryCode}/locations${buildQueryString(params)}`
       );
     }
   };
@@ -250,7 +250,7 @@ export class LocApi {
   public readonly features = {
     getLocations: (featureClass: string, params?: { q?: string; limit?: number }) => {
       return this.request<{ success: boolean; data: { results: MeilisearchGeoDocument[] }; meta: any }>(
-        `/v1/features/${featureClass}/locations${buildQueryString(params)}`
+        `/api/v1/features/${featureClass}/locations${buildQueryString(params)}`
       );
     }
   };
@@ -265,7 +265,7 @@ export class LocApi {
       offset?: number;
     }) => {
       return this.request<{ success: boolean; data: { results: Address[] }; meta: any }>(
-        `/v1/addresses${buildQueryString(params)}`
+        `/api/v1/addresses${buildQueryString(params)}`
       );
     },
 
@@ -276,7 +276,7 @@ export class LocApi {
       highlight?: boolean;
     }) => {
       return this.request<{ success: boolean; data: { results: AddressAutocompleteResult[] }; meta: any }>(
-        `/v1/addresses/autocomplete${buildQueryString(params)}`
+        `/api/v1/addresses/autocomplete${buildQueryString(params)}`
       );
     },
 
@@ -286,13 +286,13 @@ export class LocApi {
       radius?: number;
     }) => {
       return this.request<AddressReverseGeocodeResponse>(
-        `/v1/addresses/reverse-geocode${buildQueryString(params)}`
+        `/api/v1/addresses/reverse-geocode${buildQueryString(params)}`
       );
     },
 
     get: (id: number) => {
       return this.request<{ success: boolean; data: Address }>(
-        `/v1/addresses/${id}`
+        `/api/v1/addresses/${id}`
       );
     }
   };
@@ -305,7 +305,7 @@ export class LocApi {
       offset?: number;
     }) => {
       return this.request<{ success: boolean; data: PostalCode[]; meta: any }>(
-        `/v1/postal-codes${buildQueryString(params)}`
+        `/api/v1/postal-codes${buildQueryString(params)}`
       );
     }
   };
@@ -317,7 +317,7 @@ export class LocApi {
       speedKmh?: number;
       speedMph?: number;
     }) => {
-      return this.request<DistanceMatrixResponse>('/v1/distance-matrices', {
+      return this.request<DistanceMatrixResponse>('/api/v1/distance-matrices', {
         method: 'POST',
         body: JSON.stringify(params)
       });
@@ -327,7 +327,7 @@ export class LocApi {
   public readonly timezones = {
     get: (params: { lat: number; lon: number }) => {
       return this.request<TimezoneResponse>(
-        `/v1/timezones${buildQueryString(params)}`
+        `/api/v1/timezones${buildQueryString(params)}`
       );
     }
   };
@@ -335,35 +335,35 @@ export class LocApi {
   public readonly ipAddresses = {
     getWhois: (ip: string) => {
       return this.request<IpWhoisResponse>(
-        `/v1/ip-addresses/${ip}/whois-records`
+        `/api/v1/ip-addresses/${ip}/whois-records`
       );
     },
 
     getGeolocation: (ip: string) => {
       return this.request<IpGeolocationResponse>(
-        `/v1/ip-addresses/${ip}/geolocations`
+        `/api/v1/ip-addresses/${ip}/geolocations`
       );
     }
   };
 
   public readonly health = {
     check: () => {
-      return this.request<HealthResponse>('/health');
+      return this.request<HealthResponse>('/api/health');
     },
 
     detailed: () => {
-      return this.request<DetailedHealthResponse>('/health/detailed');
+      return this.request<DetailedHealthResponse>('/api/health/detailed');
     },
 
     ready: () => {
-      return this.request<ReadinessResponse>('/health/ready');
+      return this.request<ReadinessResponse>('/api/health/ready');
     }
   };
 
   public readonly stats = {
     getPublicStats: (params?: { period?: StatsTimeframe }) => {
       return this.request<PublicStatsResponse>(
-        `/v1/public/stats${buildQueryString(params)}`
+        `/api/v1/public/stats${buildQueryString(params)}`
       );
     }
   };

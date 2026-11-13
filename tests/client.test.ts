@@ -22,7 +22,7 @@ describe('LocApi Client (JS/TS SDK)', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url, requestInit] = fetchMock.mock.calls[0];
     
-    expect(url).toBe('https://locapi.dev/v1/locations?q=Prague');
+    expect(url).toBe('https://locapi.dev/api/v1/locations?q=Prague');
     expect(requestInit.headers.get('Locapi-Api-Key')).toBe('test_token');
     expect(requestInit.headers.get('Accept')).toBe('application/json');
   });
@@ -38,7 +38,7 @@ describe('LocApi Client (JS/TS SDK)', () => {
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url] = fetchMock.mock.calls[0];
-    expect(url).toBe('http://localhost:3000/v1/locations?q=Prague');
+    expect(url).toBe('http://localhost:3000/api/v1/locations?q=Prague');
   });
 
   it('throws LocApiError on non-200 responses with parsing', async () => {
@@ -85,7 +85,7 @@ describe('LocApi Client (JS/TS SDK)', () => {
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url, requestInit] = fetchMock.mock.calls[0];
-    expect(url).toBe('https://locapi.dev/v1/locations/bulk-lookups');
+    expect(url).toBe('https://locapi.dev/api/v1/locations/bulk-lookups');
     expect(requestInit.method).toBe('POST');
     expect(requestInit.body).toBe(JSON.stringify({ locations: coords }));
     expect(requestInit.headers.get('Content-Type')).toBe('application/json');
@@ -102,28 +102,28 @@ describe('LocApi Client (JS/TS SDK)', () => {
     // Address search
     await client.addresses.search({ q: 'Wenceslas', countryCode: 'CZ', limit: 10 });
     expect(fetchMock).toHaveBeenLastCalledWith(
-      'https://locapi.dev/v1/addresses?q=Wenceslas&countryCode=CZ&limit=10',
+      'https://locapi.dev/api/v1/addresses?q=Wenceslas&countryCode=CZ&limit=10',
       expect.anything()
     );
 
     // Address autocomplete
     await client.addresses.autocomplete({ q: 'Wenc', limit: 5, highlight: true });
     expect(fetchMock).toHaveBeenLastCalledWith(
-      'https://locapi.dev/v1/addresses/autocomplete?q=Wenc&limit=5&highlight=true',
+      'https://locapi.dev/api/v1/addresses/autocomplete?q=Wenc&limit=5&highlight=true',
       expect.anything()
     );
 
     // Address reverse geocode
     await client.addresses.reverseGeocode({ lat: 50.08, lon: 14.43, radius: 200 });
     expect(fetchMock).toHaveBeenLastCalledWith(
-      'https://locapi.dev/v1/addresses/reverse-geocode?lat=50.08&lon=14.43&radius=200',
+      'https://locapi.dev/api/v1/addresses/reverse-geocode?lat=50.08&lon=14.43&radius=200',
       expect.anything()
     );
 
     // Address get by ID
     await client.addresses.get(42);
     expect(fetchMock).toHaveBeenLastCalledWith(
-      'https://locapi.dev/v1/addresses/42',
+      'https://locapi.dev/api/v1/addresses/42',
       expect.anything()
     );
   });
@@ -138,7 +138,7 @@ describe('LocApi Client (JS/TS SDK)', () => {
     await client.postalCodes.search({ postalCode: '11000', countryCode: 'CZ', limit: 5 });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://locapi.dev/v1/postal-codes?postalCode=11000&countryCode=CZ&limit=5',
+      'https://locapi.dev/api/v1/postal-codes?postalCode=11000&countryCode=CZ&limit=5',
       expect.anything()
     );
   });
@@ -153,7 +153,7 @@ describe('LocApi Client (JS/TS SDK)', () => {
     await client.locations.alternativeNames(3067696, { lang: 'cs', includeSpecial: true, limit: 50 });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://locapi.dev/v1/locations/3067696/alternative-names?lang=cs&includeSpecial=true&limit=50',
+      'https://locapi.dev/api/v1/locations/3067696/alternative-names?lang=cs&includeSpecial=true&limit=50',
       expect.anything()
     );
   });
@@ -167,16 +167,16 @@ describe('LocApi Client (JS/TS SDK)', () => {
     const client = new LocApi({ apiKey: 'test_token' });
     
     await client.health.check();
-    expect(fetchMock).toHaveBeenLastCalledWith('https://locapi.dev/health', expect.anything());
+    expect(fetchMock).toHaveBeenLastCalledWith('https://locapi.dev/api/health', expect.anything());
 
     await client.health.detailed();
-    expect(fetchMock).toHaveBeenLastCalledWith('https://locapi.dev/health/detailed', expect.anything());
+    expect(fetchMock).toHaveBeenLastCalledWith('https://locapi.dev/api/health/detailed', expect.anything());
 
     await client.health.ready();
-    expect(fetchMock).toHaveBeenLastCalledWith('https://locapi.dev/health/ready', expect.anything());
+    expect(fetchMock).toHaveBeenLastCalledWith('https://locapi.dev/api/health/ready', expect.anything());
 
     await client.stats.getPublicStats({ period: '7d' });
-    expect(fetchMock).toHaveBeenLastCalledWith('https://locapi.dev/v1/public/stats?period=7d', expect.anything());
+    expect(fetchMock).toHaveBeenLastCalledWith('https://locapi.dev/api/v1/public/stats?period=7d', expect.anything());
   });
 
   it('handles distanceMatrices.create with options', async () => {
@@ -191,7 +191,7 @@ describe('LocApi Client (JS/TS SDK)', () => {
     await client.distanceMatrices.create({ origins, destinations, speedKmh: 120 });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://locapi.dev/v1/distance-matrices',
+      'https://locapi.dev/api/v1/distance-matrices',
       expect.objectContaining({
         method: 'POST',
         body: JSON.stringify({ origins, destinations, speedKmh: 120 })

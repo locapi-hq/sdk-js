@@ -1,5 +1,11 @@
 # @locapi/sdk
 
+## 0.3.0
+
+### Breaking Changes
+
+- Requests now use the public API prefix. Paths are `/api/v1/...` and `/api/health` on the origin (`https://locapi.dev` by default). Pass only the origin as `baseUrl`; do not include `/api`.
+
 ## 0.2.0
 
 ### Minor Changes
