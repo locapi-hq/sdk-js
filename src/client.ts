@@ -101,13 +101,13 @@ export class LocApi {
   // ---------------------------------------------------------------------------
 
   public readonly locations = {
-    search: (params?: { q: string; country?: string; countryCode?: string; limit?: number; page?: number }) => {
+    search: (params?: { q: string; country?: string; countryCode?: string; limit?: number }) => {
       const queryParams: Record<string, any> = { ...params };
       if (queryParams.countryCode && !queryParams.country) {
         queryParams.country = queryParams.countryCode;
         delete queryParams.countryCode;
       }
-      return this.request<{ success: boolean; data: MeilisearchGeoDocument[]; meta: any }>(
+      return this.request<{ data: MeilisearchGeoDocument[] }>(
         `/api/v1/locations${buildQueryString(queryParams)}`
       );
     },

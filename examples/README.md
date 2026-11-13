@@ -27,7 +27,7 @@ LOCAPI_BASE_URL=https://locapi.dev
 ### 1. Basic Text Search & Error Handling (`01-basic-search`)
 Demonstrates core operations:
 - Client initialization with custom options (`apiKey`, `baseUrl`).
-- Database full-text location search with country filtering and limits (`locapi.locations.search`).
+- PostgreSQL name search with country filtering and limits (`locapi.locations.search`).
 - Single location lookup by GeoNames ID (`locapi.locations.get`).
 - Multilingual alternative name retrieval (`locapi.locations.alternativeNames`).
 - Catching and inspecting `LocApiError` (status code, error type, validation issues).
